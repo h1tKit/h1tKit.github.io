@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的个人网站</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
         * {
             margin: 0;
             padding: 0;
@@ -15,7 +13,8 @@
 
         body {
             background: #0a0a0a;
-            min-height: 100vh;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -40,252 +39,448 @@
             z-index: 999;
         }
 
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            color: #00ff41;
-            font-size: 12px;
-            opacity: 0.3;
-            animation: twinkle var(--duration) ease-in-out infinite;
-            animation-delay: var(--delay);
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.6; }
-        }
-
         .container {
             position: relative;
             z-index: 1;
-            padding: 40px 30px;
-            max-width: 900px;
-            width: 95%;
         }
 
         .ascii-box {
-            border: 2px solid #00ff41;
-            padding: 50px 40px;
-            position: relative;
-            background: rgba(0, 10, 0, 0.85);
-            box-shadow:
-                0 0 20px rgba(0, 255, 65, 0.15),
-                0 0 60px rgba(0, 255, 65, 0.05),
-                inset 0 0 20px rgba(0, 255, 65, 0.03);
-        }
-
-        .ascii-box::before {
-            content: "╔══════════════════════════════════════════════════════════╗";
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            color: #00ff41;
-            font-size: 11px;
-            white-space: pre;
-            background: #0a0a0a;
-            padding: 0 8px;
-        }
-
-        .ascii-box::after {
-            content: "╚══════════════════════════════════════════════════════════╝";
-            position: absolute;
-            bottom: -12px;
-            right: 20px;
-            color: #00ff41;
-            font-size: 11px;
-            white-space: pre;
-            background: #0a0a0a;
-            padding: 0 8px;
-        }
-
-        .prompt-line {
-            color: #ff79c6;
-            font-size: 15px;
-            margin-bottom: 20px;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 3px solid #ff79c6;
-            width: 0;
-            animation:
-                typing 0.8s steps(18, end) 0.3s forwards,
-                blink 0.8s step-end infinite;
-        }
-
-        .prompt-line .prompt-symbol {
-            color: #00ff41;
-        }
-
-        .prompt-line .prompt-user {
-            color: #8be9fd;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 22ch; }
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
+            padding: 30px 20px;
+            display: flex;
+            gap: 20px;
         }
 
         .ascii-title {
-            text-align: center;
-            margin: 20px 0;
             font-size: 13px;
             line-height: 1.1;
+            white-space: pre;
+        }
+
+        .ascii-title-left {
+            color: #ffe0f0;
+            text-shadow:
+                0 0 3px #fff,
+                0 0 8px #ffe0f0,
+                0 0 15px #ffc0e0,
+                0 0 30px #ffa0d0,
+                0 0 60px #ff80c0,
+                0 0 90px rgba(255, 160, 200, 0.5),
+                0 0 120px rgba(255, 128, 192, 0.3),
+                0 0 150px rgba(255, 128, 192, 0.15);
+        }
+
+        .ascii-title-right {
             color: #f1fa8c;
-            text-shadow: 0 0 10px rgba(241, 250, 140, 0.5);
+            text-shadow:
+                0 0 3px #fff,
+                0 0 8px #f1fa8c,
+                0 0 15px #f1fa8c,
+                0 0 30px #f0c040,
+                0 0 60px #f0a020,
+                0 0 90px rgba(240, 160, 32, 0.5),
+                0 0 120px rgba(240, 160, 32, 0.3),
+                0 0 150px rgba(240, 160, 32, 0.15);
         }
 
-        .divider {
-            text-align: center;
-            color: #bd93f9;
-            font-size: 14px;
-            margin: 15px 0;
-            letter-spacing: 1px;
-            animation: pulse 2s ease-in-out infinite;
+        .ascii-title-left .flicker-1 {
+            animation: flicker-pink-1 20s ease-in-out infinite;
+        }
+        .ascii-title-left .flicker-2 {
+            animation: flicker-pink-2 25s ease-in-out infinite;
+        }
+        .ascii-title-left .flicker-3 {
+            animation: flicker-pink-3 30s ease-in-out infinite;
+        }
+        .ascii-title-left .flicker-4 {
+            animation: flicker-pink-4 22s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        .ascii-title-right .flicker-1 {
+            animation: flicker-yellow-1 20s ease-in-out infinite;
+        }
+        .ascii-title-right .flicker-2 {
+            animation: flicker-yellow-2 25s ease-in-out infinite;
+        }
+        .ascii-title-right .flicker-3 {
+            animation: flicker-yellow-3 30s ease-in-out infinite;
+        }
+        .ascii-title-right .flicker-4 {
+            animation: flicker-yellow-4 22s ease-in-out infinite;
         }
 
-        .line {
-            color: #f8f8f2;
-            font-size: 14px;
-            line-height: 1.8;
-            margin: 6px 0;
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .ascii-title-left .color-warm {
+            color: #ffd0e0;
+            text-shadow:
+                0 0 3px #fff,
+                0 0 8px #ffd0e0,
+                0 0 15px #ffb0d0,
+                0 0 30px #ff90c0,
+                0 0 60px #ff70b0,
+                0 0 90px rgba(255, 112, 176, 0.5),
+                0 0 120px rgba(255, 112, 176, 0.3),
+                0 0 150px rgba(255, 112, 176, 0.15);
+        }
+        .ascii-title-left .color-cool {
+            color: #e0f0ff;
+            text-shadow:
+                0 0 3px #fff,
+                0 0 8px #e0f0ff,
+                0 0 15px #c0e0ff,
+                0 0 30px #a0d0ff,
+                0 0 60px #80c0ff,
+                0 0 90px rgba(128, 192, 255, 0.5),
+                0 0 120px rgba(128, 192, 255, 0.3),
+                0 0 150px rgba(128, 192, 255, 0.15);
+        }
+        .ascii-title-left .color-green {
+            color: #c0ffc0;
+            text-shadow:
+                0 0 3px #fff,
+                0 0 8px #c0ffc0,
+                0 0 15px #a0ffa0,
+                0 0 30px #80ff80,
+                0 0 60px #60ff60,
+                0 0 90px rgba(96, 255, 96, 0.5),
+                0 0 120px rgba(96, 255, 96, 0.3),
+                0 0 150px rgba(96, 255, 96, 0.15);
         }
 
-        .line:nth-child(1) { animation-delay: 1.0s; }
-        .line:nth-child(2) { animation-delay: 1.3s; }
-        .line:nth-child(3) { animation-delay: 1.6s; }
-        .line:nth-child(4) { animation-delay: 1.9s; }
-        .line:nth-child(5) { animation-delay: 2.2s; }
-        .line:nth-child(6) { animation-delay: 2.5s; }
-        .line:nth-child(7) { animation-delay: 2.8s; }
-        .line:nth-child(8) { animation-delay: 3.1s; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+        .ascii-title-right .color-warm {
+            color: #ffd080;
+            text-shadow:
+                0 0 3px #fff,
+                0 0 8px #ffd080,
+                0 0 15px #ffc060,
+                0 0 30px #e09030,
+                0 0 60px #d07020,
+                0 0 90px rgba(208, 112, 32, 0.5),
+                0 0 120px rgba(208, 112, 32, 0.3),
+                0 0 150px rgba(208, 112, 32, 0.15);
+        }
+        .ascii-title-right .color-cool {
+            color: #c8e0ff;
+            text-shadow:
+                0 0 3px #fff,
+                0 0 8px #c8e0ff,
+                0 0 15px #a0c8ff,
+                0 0 30px #70a0e0,
+                0 0 60px #5080c0,
+                0 0 90px rgba(80, 128, 192, 0.5),
+                0 0 120px rgba(80, 128, 192, 0.3),
+                0 0 150px rgba(80, 128, 192, 0.15);
+        }
+        .ascii-title-right .color-green {
+            color: #b0ffb0;
+            text-shadow:
+                0 0 3px #fff,
+                0 0 8px #b0ffb0,
+                0 0 15px #80e080,
+                0 0 30px #50b050,
+                0 0 60px #308030,
+                0 0 90px rgba(48, 128, 48, 0.5),
+                0 0 120px rgba(48, 128, 48, 0.3),
+                0 0 150px rgba(48, 128, 48, 0.15);
         }
 
-        .highlight { color: #ff79c6; }
-        .cyan { color: #8be9fd; }
-        .green { color: #50fa7b; }
-        .yellow { color: #f1fa8c; }
-        .orange { color: #ffb86c; }
-        .purple { color: #bd93f9; font-size: 12px; }
-        .red { color: #ff5555; }
-
-        .blink-text {
-            animation: blinkText 1s step-end infinite;
-        }
-
-        @keyframes blinkText {
-            50% { opacity: 0; }
-        }
-
-        .status-bar {
-            margin-top: 30px;
-            font-size: 12px;
-            color: #6272a4;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 0.6s ease 3.5s forwards;
-        }
-
-        .ascii-footer {
-            text-align: center;
-            margin-top: 25px;
-            font-size: 11px;
-            color: #44475a;
-            opacity: 0;
-            animation: fadeIn 0.6s ease 4s forwards;
-        }
-
-        .cursor-inline {
-            display: inline-block;
-            width: 10px;
-            height: 16px;
-            background: #f8f8f2;
-            animation: blink 0.8s step-end infinite;
-            vertical-align: middle;
-            margin-left: 2px;
-        }
-
-        .tag {
-            display: inline-block;
-            border: 1px solid #6272a4;
-            padding: 2px 8px;
-            margin: 2px;
-            font-size: 11px;
-            color: #8be9fd;
-        }
-
-        @media (max-width: 768px) {
-            .ascii-box {
-                padding: 30px 15px;
+        @keyframes flicker-pink-1 {
+            0%, 85%, 100% {
+                color: #ffe0f0;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #ffe0f0,
+                    0 0 15px #ffc0e0,
+                    0 0 30px #ffa0d0,
+                    0 0 60px #ff80c0,
+                    0 0 90px rgba(255, 160, 200, 0.5),
+                    0 0 120px rgba(255, 128, 192, 0.3),
+                    0 0 150px rgba(255, 128, 192, 0.15);
             }
-            .ascii-box::before,
-            .ascii-box::after {
-                font-size: 8px;
+            86%, 89% {
+                color: #a08090;
+                text-shadow:
+                    0 0 1px rgba(255, 224, 240, 0.3),
+                    0 0 3px rgba(255, 160, 200, 0.2);
             }
-            .ascii-box::before {
-                content: "╔══════════════════════════╗";
-                left: 5px;
+            90%, 93% {
+                color: #ffe0f0;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #ffe0f0,
+                    0 0 15px #ffc0e0,
+                    0 0 30px #ffa0d0,
+                    0 0 60px #ff80c0,
+                    0 0 90px rgba(255, 160, 200, 0.5),
+                    0 0 120px rgba(255, 128, 192, 0.3),
+                    0 0 150px rgba(255, 128, 192, 0.15);
             }
-            .ascii-box::after {
-                content: "╚══════════════════════════╝";
-                right: 5px;
-            }
-            .ascii-title {
-                font-size: 8px;
-                line-height: 1.0;
-            }
-            .line {
-                font-size: 12px;
-            }
-            .prompt-line {
-                font-size: 12px;
-            }
-            @keyframes typing {
-                from { width: 0; }
-                to { width: 16ch; }
+            94%, 97% {
+                color: #b090a0;
+                text-shadow:
+                    0 0 2px rgba(255, 224, 240, 0.4),
+                    0 0 5px rgba(255, 160, 200, 0.3);
             }
         }
 
-        @media (max-width: 480px) {
-            .ascii-box::before,
-            .ascii-box::after {
-                font-size: 7px;
+        @keyframes flicker-pink-2 {
+            0%, 80%, 100% {
+                color: #ffe0f0;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #ffe0f0,
+                    0 0 15px #ffc0e0,
+                    0 0 30px #ffa0d0,
+                    0 0 60px #ff80c0,
+                    0 0 90px rgba(255, 160, 200, 0.5),
+                    0 0 120px rgba(255, 128, 192, 0.3),
+                    0 0 150px rgba(255, 128, 192, 0.15);
             }
-            .ascii-box::before {
-                content: "╔══════════════════╗";
-                left: 2px;
+            81%, 86% {
+                color: #907080;
+                text-shadow:
+                    0 0 1px rgba(255, 224, 240, 0.2);
             }
-            .ascii-box::after {
-                content: "╚══════════════════╝";
-                right: 2px;
+            87%, 90% {
+                color: #ffe0f0;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #ffe0f0,
+                    0 0 15px #ffc0e0,
+                    0 0 30px #ffa0d0,
+                    0 0 60px #ff80c0,
+                    0 0 90px rgba(255, 160, 200, 0.5),
+                    0 0 120px rgba(255, 128, 192, 0.3),
+                    0 0 150px rgba(255, 128, 192, 0.15);
             }
-            .ascii-title {
-                font-size: 6px;
+            91%, 95% {
+                color: #a08090;
+                text-shadow:
+                    0 0 1px rgba(255, 224, 240, 0.3),
+                    0 0 2px rgba(255, 160, 200, 0.2);
             }
-            .line {
-                font-size: 11px;
+        }
+
+        @keyframes flicker-pink-3 {
+            0%, 88%, 100% {
+                color: #ffe0f0;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #ffe0f0,
+                    0 0 15px #ffc0e0,
+                    0 0 30px #ffa0d0,
+                    0 0 60px #ff80c0,
+                    0 0 90px rgba(255, 160, 200, 0.5),
+                    0 0 120px rgba(255, 128, 192, 0.3),
+                    0 0 150px rgba(255, 128, 192, 0.15);
+            }
+            89%, 94% {
+                color: #806070;
+                text-shadow: 0 0 1px rgba(255, 224, 240, 0.15);
+            }
+            95%, 97% {
+                color: #d0b0c0;
+                text-shadow:
+                    0 0 2px rgba(255, 224, 240, 0.5),
+                    0 0 5px rgba(255, 160, 200, 0.3);
+            }
+            98%, 99% {
+                color: #907080;
+                text-shadow:
+                    0 0 1px rgba(255, 224, 240, 0.2);
+            }
+        }
+
+        @keyframes flicker-pink-4 {
+            0%, 82%, 100% {
+                color: #ffe0f0;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #ffe0f0,
+                    0 0 15px #ffc0e0,
+                    0 0 30px #ffa0d0,
+                    0 0 60px #ff80c0,
+                    0 0 90px rgba(255, 160, 200, 0.5),
+                    0 0 120px rgba(255, 128, 192, 0.3),
+                    0 0 150px rgba(255, 128, 192, 0.15);
+            }
+            83%, 88% {
+                color: #a08090;
+                text-shadow:
+                    0 0 1px rgba(255, 224, 240, 0.3),
+                    0 0 3px rgba(255, 160, 200, 0.2);
+            }
+            89%, 92% {
+                color: #ffe0f0;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #ffe0f0,
+                    0 0 15px #ffc0e0,
+                    0 0 30px #ffa0d0,
+                    0 0 60px #ff80c0,
+                    0 0 90px rgba(255, 160, 200, 0.5),
+                    0 0 120px rgba(255, 128, 192, 0.3),
+                    0 0 150px rgba(255, 128, 192, 0.15);
+            }
+            93%, 97% {
+                color: #857075;
+                text-shadow:
+                    0 0 1px rgba(255, 224, 240, 0.2);
+            }
+            98%, 99% {
+                color: #c0a0b0;
+                text-shadow:
+                    0 0 2px rgba(255, 224, 240, 0.5),
+                    0 0 8px rgba(255, 160, 200, 0.4);
+            }
+        }
+
+        @keyframes flicker-yellow-1 {
+            0%, 85%, 100% {
+                color: #f1fa8c;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #f1fa8c,
+                    0 0 15px #f1fa8c,
+                    0 0 30px #f0c040,
+                    0 0 60px #f0a020,
+                    0 0 90px rgba(240, 160, 32, 0.5),
+                    0 0 120px rgba(240, 160, 32, 0.3),
+                    0 0 150px rgba(240, 160, 32, 0.15);
+            }
+            86%, 89% {
+                color: #8a8a40;
+                text-shadow:
+                    0 0 1px rgba(241, 250, 140, 0.3),
+                    0 0 3px rgba(240, 192, 64, 0.2);
+            }
+            90%, 93% {
+                color: #f1fa8c;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #f1fa8c,
+                    0 0 15px #f1fa8c,
+                    0 0 30px #f0c040,
+                    0 0 60px #f0a020,
+                    0 0 90px rgba(240, 160, 32, 0.5),
+                    0 0 120px rgba(240, 160, 32, 0.3),
+                    0 0 150px rgba(240, 160, 32, 0.15);
+            }
+            94%, 97% {
+                color: #a0a050;
+                text-shadow:
+                    0 0 2px rgba(241, 250, 140, 0.4),
+                    0 0 5px rgba(240, 192, 64, 0.3);
+            }
+        }
+
+        @keyframes flicker-yellow-2 {
+            0%, 80%, 100% {
+                color: #f1fa8c;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #f1fa8c,
+                    0 0 15px #f1fa8c,
+                    0 0 30px #f0c040,
+                    0 0 60px #f0a020,
+                    0 0 90px rgba(240, 160, 32, 0.5),
+                    0 0 120px rgba(240, 160, 32, 0.3),
+                    0 0 150px rgba(240, 160, 32, 0.15);
+            }
+            81%, 86% {
+                color: #707030;
+                text-shadow:
+                    0 0 1px rgba(241, 250, 140, 0.2);
+            }
+            87%, 90% {
+                color: #f1fa8c;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #f1fa8c,
+                    0 0 15px #f1fa8c,
+                    0 0 30px #f0c040,
+                    0 0 60px #f0a020,
+                    0 0 90px rgba(240, 160, 32, 0.5),
+                    0 0 120px rgba(240, 160, 32, 0.3),
+                    0 0 150px rgba(240, 160, 32, 0.15);
+            }
+            91%, 95% {
+                color: #909040;
+                text-shadow:
+                    0 0 1px rgba(241, 250, 140, 0.3),
+                    0 0 2px rgba(240, 192, 64, 0.2);
+            }
+        }
+
+        @keyframes flicker-yellow-3 {
+            0%, 88%, 100% {
+                color: #f1fa8c;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #f1fa8c,
+                    0 0 15px #f1fa8c,
+                    0 0 30px #f0c040,
+                    0 0 60px #f0a020,
+                    0 0 90px rgba(240, 160, 32, 0.5),
+                    0 0 120px rgba(240, 160, 32, 0.3),
+                    0 0 150px rgba(240, 160, 32, 0.15);
+            }
+            89%, 94% {
+                color: #606020;
+                text-shadow: 0 0 1px rgba(241, 250, 140, 0.15);
+            }
+            95%, 97% {
+                color: #d0d070;
+                text-shadow:
+                    0 0 2px rgba(241, 250, 140, 0.5),
+                    0 0 5px rgba(240, 192, 64, 0.3);
+            }
+            98%, 99% {
+                color: #808030;
+                text-shadow:
+                    0 0 1px rgba(241, 250, 140, 0.2);
+            }
+        }
+
+        @keyframes flicker-yellow-4 {
+            0%, 82%, 100% {
+                color: #f1fa8c;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #f1fa8c,
+                    0 0 15px #f1fa8c,
+                    0 0 30px #f0c040,
+                    0 0 60px #f0a020,
+                    0 0 90px rgba(240, 160, 32, 0.5),
+                    0 0 120px rgba(240, 160, 32, 0.3),
+                    0 0 150px rgba(240, 160, 32, 0.15);
+            }
+            83%, 88% {
+                color: #909040;
+                text-shadow:
+                    0 0 1px rgba(241, 250, 140, 0.3),
+                    0 0 3px rgba(240, 192, 64, 0.2);
+            }
+            89%, 92% {
+                color: #f1fa8c;
+                text-shadow:
+                    0 0 3px #fff,
+                    0 0 8px #f1fa8c,
+                    0 0 15px #f1fa8c,
+                    0 0 30px #f0c040,
+                    0 0 60px #f0a020,
+                    0 0 90px rgba(240, 160, 32, 0.5),
+                    0 0 120px rgba(240, 160, 32, 0.3),
+                    0 0 150px rgba(240, 160, 32, 0.15);
+            }
+            93%, 97% {
+                color: #757525;
+                text-shadow:
+                    0 0 1px rgba(241, 250, 140, 0.2);
+            }
+            98%, 99% {
+                color: #c0c060;
+                text-shadow:
+                    0 0 2px rgba(241, 250, 140, 0.5),
+                    0 0 8px rgba(240, 192, 64, 0.4);
             }
         }
     </style>
@@ -294,75 +489,106 @@
 
     <div class="crt-overlay"></div>
 
-    <div class="stars" id="stars"></div>
-
-    <div class="container">
+    <div class="container" id="container">
         <div class="ascii-box">
-
-            <div class="prompt-line">
-                <span class="prompt-symbol">┌─[</span><span class="prompt-user">user@website</span><span class="prompt-symbol">]─[~/welcome]</span>
-            </div>
-
-            <pre class="ascii-title">
- _    _      _                           _          _   _
-| |  | |    | |                         | |        | | | |
-| |__| | ___| |_ __ _ ___ ___  _ __   __| | ___  __| |_| | ___  ___
-|  __  |/ _ \ __/ _` / __/ _ \| '_ \ / _` |/ _ \/ _` | | | |/ _ \/ __|
-| |  | |  __/ || (_| \__ \ (_) | | | | (_| |  __/ (_| | |_| |  __/\__ \
-|_|  |_|\___|\__\__,_|___/\___/|_| |_|\__,_|\___|\__,_|\___|\___||___/
+            <pre class="ascii-title ascii-title-left" id="ascii-left">
+          _____                    _____                _____          
+         /\    \                  /\    \              |\    \         
+        /::\____\                /::\    \             |:\____\        
+       /::::|   |               /::::\    \            |::|   |        
+      /:::::|   |              /::::::\    \           |::|   |        
+     /::::::|   |             /:::/\:::\    \          |::|   |        
+    /:::/|::|   |            /:::/__\:::\    \         |::|   |        
+   /:::/ |::|   |           /::::\   \:::\    \        |::|   |        
+  /:::/  |::|   | _____    /::::::\   \:::\    \       |::|___|______  
+ /:::/   |::|   |/\    \  /:::/\:::\   \:::\    \      /::::::::\    \ 
+/:: /    |::|   /::\____\/:::/  \:::\   \:::\____\    /::::::::::\____\
+\::/    /|::|  /:::/    /\::/    \:::\  /:::/    /   /:::/~~~~/~~      
+ \/____/ |::| /:::/    /  \/____/ \:::\/:::/    /   /:::/    /         
+         |::|/:::/    /            \::::::/    /   /:::/    /          
+         |::::::/    /              \::::/    /   /:::/    /           
+         |:::::/    /               /:::/    /    \::/    /            
+         |::::/    /               /:::/    /      \/____/             
+         /:::/    /               /:::/    /                           
+        /:::/    /               /:::/    /                            
+        \::/    /                \::/    /                             
+         \/____/                  \/____/                              
             </pre>
-
-            <div class="divider">
-                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-            </div>
-
-            <p class="line"><span class="yellow">[INFO]</span>  <span class="highlight">你好，世界！</span> — Hello, World!</p>
-            <p class="line"><span class="yellow">[INFO]</span>  欢迎来到我的第一个<span class="green">个人网站</span></p>
-            <p class="line"><span class="yellow">[SYS]</span>  本站使用 <span class="cyan">GitHub Pages</span> 搭建</p>
-            <p class="line"><span class="yellow">[SYS]</span>  <span class="orange">ASCII码彩色终端风格</span> — 复古即是未来</p>
-            <p class="line">&nbsp;</p>
-            <p class="line"><span class="purple"> user@website ~ $</span> <span class="red">cat</span> ./tags.txt</p>
-            <p class="line">
-                <span class="tag">WEB</span>
-                <span class="tag">GITHUB</span>
-                <span class="tag">CODE</span>
-                <span class="tag">ASCII</span>
-                <span class="tag">RETRO</span>
-            </p>
-            <p class="line"><span class="purple"> user@website ~ $</span> <span class="blink-text">█</span></p>
-
-            <div class="status-bar">
-                [ CONNECTION: <span style="color:#50fa7b;">ESTABLISHED</span> ] &nbsp;
-                [ STATUS: <span style="color:#f1fa8c;">ONLINE</span> ] &nbsp;
-                [ ENCODING: <span style="color:#8be9fd;">UTF-8</span> ]
-            </div>
-
-        </div>
-
-        <div class="ascii-footer">
-            ╔══════════════════════════════════════════════════════════╗<br>
-            ║  <span style="color:#00ff41;">ASCII Art Terminal v1.0</span>  │  <span style="color:#8be9fd;">GitHub Pages</span>  │  <span style="color:#ff79c6;">2026</span>  ║<br>
-            ╚══════════════════════════════════════════════════════════╝
+            <pre class="ascii-title ascii-title-right" id="ascii-right">
+          _____                    _____                    _____          
+         /\    \                  /\    \                  /\    \         
+        /::\____\                /::\____\                /::\____\        
+       /::::|   |               /:::/    /               /:::/    /        
+      /:::::|   |              /:::/    /               /:::/    /         
+     /::::::|   |             /:::/    /               /:::/    /          
+    /:::/|::|   |            /:::/    /               /:::/____/           
+   /:::/ |::|   |           /:::/    /               /::::\    \           
+  /:::/  |::|   | _____    /:::/    /      _____    /::::::\____\________  
+ /:::/   |::|   |/\    \  /:::/____/      /\    \  /:::/\:::::::::::\    \ 
+/:: /    |::|   /::\____\|:::|    /      /::\____\/:::/  |:::::::::::\____\
+\::/    /|::|  /:::/    /|:::|____\     /:::/    /\::/   |::|~~~|~~~~~     
+ \/____/ |::| /:::/    /  \:::\    \   /:::/    /  \/____|::|   |          
+         |::|/:::/    /    \:::\    \ /:::/    /         |::|   |          
+         |::::::/    /      \:::\    /:::/    /          |::|   |          
+         |:::::/    /        \:::\__/:::/    /           |::|   |          
+         |::::/    /          \::::::::/    /            |::|   |          
+         /:::/    /            \::::::/    /             |::|   |          
+        /:::/    /              \::::/    /              \::|   |          
+        \::/    /                \::/____/                \:|   |          
+         \/____/                  ~~                       \|___|          
+            </pre>
         </div>
     </div>
 
     <script>
         (function() {
-            var container = document.getElementById('stars');
-            var chars = ['.', '*', '+', '·', '•', '∘', '⋆'];
-            var count = 60;
+            var flickerClasses = ['flicker-1', 'flicker-2', 'flicker-3', 'flicker-4'];
+            var colorClasses = ['color-warm', 'color-cool', 'color-green'];
 
-            for (var i = 0; i < count; i++) {
-                var span = document.createElement('span');
-                span.className = 'star';
-                span.textContent = chars[Math.floor(Math.random() * chars.length)];
-                span.style.left = Math.random() * 100 + '%';
-                span.style.top = Math.random() * 100 + '%';
-                span.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
-                span.style.setProperty('--delay', Math.random() * 4 + 's');
-                span.style.color = ['#00ff41', '#8be9fd', '#ff79c6', '#f1fa8c', '#bd93f9'][Math.floor(Math.random() * 5)];
-                container.appendChild(span);
+            function processAscii(pre) {
+                var text = pre.textContent;
+                var html = '';
+                for (var i = 0; i < text.length; i++) {
+                    var ch = text[i];
+                    if (ch === ' ' || ch === '\n') {
+                        html += ch;
+                        continue;
+                    }
+                    var classes = [];
+                    var style = '';
+                    if (Math.random() < 0.03) {
+                        classes.push(flickerClasses[Math.floor(Math.random() * flickerClasses.length)]);
+                        style = 'animation-delay:' + (Math.random() * 20).toFixed(2) + 's';
+                    }
+                    if (Math.random() < 0.03) {
+                        classes.push(colorClasses[Math.floor(Math.random() * colorClasses.length)]);
+                    }
+                    if (classes.length > 0) {
+                        html += '<span class="' + classes.join(' ') + '"' + (style ? ' style="' + style + '"' : '') + '>' + ch + '</span>';
+                    } else {
+                        html += ch;
+                    }
+                }
+                pre.innerHTML = html;
             }
+
+            processAscii(document.getElementById('ascii-left'));
+            processAscii(document.getElementById('ascii-right'));
+
+            function fitToScreen() {
+                var container = document.getElementById('container');
+                container.style.transform = 'none';
+                var vw = window.innerWidth;
+                var vh = window.innerHeight;
+                var cw = container.scrollWidth;
+                var ch = container.scrollHeight;
+                var scaleX = (vw - 40) / cw;
+                var scaleY = (vh - 40) / ch;
+                var scale = Math.min(scaleX, scaleY, 1);
+                container.style.transform = 'scale(' + scale + ')';
+            }
+            fitToScreen();
+            window.addEventListener('resize', fitToScreen);
         })();
     </script>
 
