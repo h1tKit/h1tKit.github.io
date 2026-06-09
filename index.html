@@ -4,9 +4,367 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的个人网站</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', 'Source Code Pro', 'Consolas', monospace;
+            overflow: hidden;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15) 0px,
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            color: #00ff41;
+            font-size: 12px;
+            opacity: 0.3;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 40px 30px;
+            max-width: 900px;
+            width: 95%;
+        }
+
+        .ascii-box {
+            border: 2px solid #00ff41;
+            padding: 50px 40px;
+            position: relative;
+            background: rgba(0, 10, 0, 0.85);
+            box-shadow:
+                0 0 20px rgba(0, 255, 65, 0.15),
+                0 0 60px rgba(0, 255, 65, 0.05),
+                inset 0 0 20px rgba(0, 255, 65, 0.03);
+        }
+
+        .ascii-box::before {
+            content: "╔══════════════════════════════════════════════════════════╗";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            color: #00ff41;
+            font-size: 11px;
+            white-space: pre;
+            background: #0a0a0a;
+            padding: 0 8px;
+        }
+
+        .ascii-box::after {
+            content: "╚══════════════════════════════════════════════════════════╝";
+            position: absolute;
+            bottom: -12px;
+            right: 20px;
+            color: #00ff41;
+            font-size: 11px;
+            white-space: pre;
+            background: #0a0a0a;
+            padding: 0 8px;
+        }
+
+        .prompt-line {
+            color: #ff79c6;
+            font-size: 15px;
+            margin-bottom: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #ff79c6;
+            width: 0;
+            animation:
+                typing 0.8s steps(18, end) 0.3s forwards,
+                blink 0.8s step-end infinite;
+        }
+
+        .prompt-line .prompt-symbol {
+            color: #00ff41;
+        }
+
+        .prompt-line .prompt-user {
+            color: #8be9fd;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 22ch; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .ascii-title {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 13px;
+            line-height: 1.1;
+            color: #f1fa8c;
+            text-shadow: 0 0 10px rgba(241, 250, 140, 0.5);
+        }
+
+        .divider {
+            text-align: center;
+            color: #bd93f9;
+            font-size: 14px;
+            margin: 15px 0;
+            letter-spacing: 1px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .line {
+            color: #f8f8f2;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 6px 0;
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .line:nth-child(1) { animation-delay: 1.0s; }
+        .line:nth-child(2) { animation-delay: 1.3s; }
+        .line:nth-child(3) { animation-delay: 1.6s; }
+        .line:nth-child(4) { animation-delay: 1.9s; }
+        .line:nth-child(5) { animation-delay: 2.2s; }
+        .line:nth-child(6) { animation-delay: 2.5s; }
+        .line:nth-child(7) { animation-delay: 2.8s; }
+        .line:nth-child(8) { animation-delay: 3.1s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .highlight { color: #ff79c6; }
+        .cyan { color: #8be9fd; }
+        .green { color: #50fa7b; }
+        .yellow { color: #f1fa8c; }
+        .orange { color: #ffb86c; }
+        .purple { color: #bd93f9; font-size: 12px; }
+        .red { color: #ff5555; }
+
+        .blink-text {
+            animation: blinkText 1s step-end infinite;
+        }
+
+        @keyframes blinkText {
+            50% { opacity: 0; }
+        }
+
+        .status-bar {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #6272a4;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 3.5s forwards;
+        }
+
+        .ascii-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 11px;
+            color: #44475a;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 4s forwards;
+        }
+
+        .cursor-inline {
+            display: inline-block;
+            width: 10px;
+            height: 16px;
+            background: #f8f8f2;
+            animation: blink 0.8s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        .tag {
+            display: inline-block;
+            border: 1px solid #6272a4;
+            padding: 2px 8px;
+            margin: 2px;
+            font-size: 11px;
+            color: #8be9fd;
+        }
+
+        @media (max-width: 768px) {
+            .ascii-box {
+                padding: 30px 15px;
+            }
+            .ascii-box::before,
+            .ascii-box::after {
+                font-size: 8px;
+            }
+            .ascii-box::before {
+                content: "╔══════════════════════════╗";
+                left: 5px;
+            }
+            .ascii-box::after {
+                content: "╚══════════════════════════╝";
+                right: 5px;
+            }
+            .ascii-title {
+                font-size: 8px;
+                line-height: 1.0;
+            }
+            .line {
+                font-size: 12px;
+            }
+            .prompt-line {
+                font-size: 12px;
+            }
+            @keyframes typing {
+                from { width: 0; }
+                to { width: 16ch; }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ascii-box::before,
+            .ascii-box::after {
+                font-size: 7px;
+            }
+            .ascii-box::before {
+                content: "╔══════════════════╗";
+                left: 2px;
+            }
+            .ascii-box::after {
+                content: "╚══════════════════╝";
+                right: 2px;
+            }
+            .ascii-title {
+                font-size: 6px;
+            }
+            .line {
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>你好，世界！</h1>
-    <p>欢迎来到我的第一个个人网站。这里是使用 GitHub Pages 搭建的。</p>
+
+    <div class="crt-overlay"></div>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="ascii-box">
+
+            <div class="prompt-line">
+                <span class="prompt-symbol">┌─[</span><span class="prompt-user">user@website</span><span class="prompt-symbol">]─[~/welcome]</span>
+            </div>
+
+            <pre class="ascii-title">
+ _    _      _                           _          _   _
+| |  | |    | |                         | |        | | | |
+| |__| | ___| |_ __ _ ___ ___  _ __   __| | ___  __| |_| | ___  ___
+|  __  |/ _ \ __/ _` / __/ _ \| '_ \ / _` |/ _ \/ _` | | | |/ _ \/ __|
+| |  | |  __/ || (_| \__ \ (_) | | | | (_| |  __/ (_| | |_| |  __/\__ \
+|_|  |_|\___|\__\__,_|___/\___/|_| |_|\__,_|\___|\__,_|\___|\___||___/
+            </pre>
+
+            <div class="divider">
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+            </div>
+
+            <p class="line"><span class="yellow">[INFO]</span>  <span class="highlight">你好，世界！</span> — Hello, World!</p>
+            <p class="line"><span class="yellow">[INFO]</span>  欢迎来到我的第一个<span class="green">个人网站</span></p>
+            <p class="line"><span class="yellow">[SYS]</span>  本站使用 <span class="cyan">GitHub Pages</span> 搭建</p>
+            <p class="line"><span class="yellow">[SYS]</span>  <span class="orange">ASCII码彩色终端风格</span> — 复古即是未来</p>
+            <p class="line">&nbsp;</p>
+            <p class="line"><span class="purple"> user@website ~ $</span> <span class="red">cat</span> ./tags.txt</p>
+            <p class="line">
+                <span class="tag">WEB</span>
+                <span class="tag">GITHUB</span>
+                <span class="tag">CODE</span>
+                <span class="tag">ASCII</span>
+                <span class="tag">RETRO</span>
+            </p>
+            <p class="line"><span class="purple"> user@website ~ $</span> <span class="blink-text">█</span></p>
+
+            <div class="status-bar">
+                [ CONNECTION: <span style="color:#50fa7b;">ESTABLISHED</span> ] &nbsp;
+                [ STATUS: <span style="color:#f1fa8c;">ONLINE</span> ] &nbsp;
+                [ ENCODING: <span style="color:#8be9fd;">UTF-8</span> ]
+            </div>
+
+        </div>
+
+        <div class="ascii-footer">
+            ╔══════════════════════════════════════════════════════════╗<br>
+            ║  <span style="color:#00ff41;">ASCII Art Terminal v1.0</span>  │  <span style="color:#8be9fd;">GitHub Pages</span>  │  <span style="color:#ff79c6;">2026</span>  ║<br>
+            ╚══════════════════════════════════════════════════════════╝
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            var container = document.getElementById('stars');
+            var chars = ['.', '*', '+', '·', '•', '∘', '⋆'];
+            var count = 60;
+
+            for (var i = 0; i < count; i++) {
+                var span = document.createElement('span');
+                span.className = 'star';
+                span.textContent = chars[Math.floor(Math.random() * chars.length)];
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
+                span.style.setProperty('--delay', Math.random() * 4 + 's');
+                span.style.color = ['#00ff41', '#8be9fd', '#ff79c6', '#f1fa8c', '#bd93f9'][Math.floor(Math.random() * 5)];
+                container.appendChild(span);
+            }
+        })();
+    </script>
+
 </body>
 </html>
