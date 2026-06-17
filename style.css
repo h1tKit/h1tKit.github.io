@@ -54,20 +54,20 @@ body {
 }
 
 .nav a:hover {
-    color: #f1fa8c;
+    color: #fff;
     text-shadow:
         0 0 5px #fff,
-        0 0 10px #f1fa8c,
-        0 0 20px #f0c040,
-        0 0 40px rgba(240, 160, 32, 0.3);
+        0 0 10px #fff,
+        0 0 20px rgba(255, 255, 255, 0.6),
+        0 0 40px rgba(255, 255, 255, 0.3);
 }
 
 .nav a.active {
-    color: #f1fa8c;
+    color: #fff;
     text-shadow:
         0 0 3px #fff,
-        0 0 8px #f1fa8c,
-        0 0 15px #f0c040;
+        0 0 8px #fff,
+        0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 .nav-sep {
@@ -242,6 +242,17 @@ body {
     margin: 30px 0;
     user-select: none;
     letter-spacing: 2px;
+}
+
+.blog-card {
+    position: relative;
+}
+
+.blog-date {
+    font-size: 11px;
+    color: #6272a4;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
 }
 
 @media (max-width: 768px) {
